@@ -1,5 +1,7 @@
 #include "libs.h"
-#include "cuda\gpu_debayer.h"
+#include "../cuda/gpu_debayer.h"
+
+#include <iostream>
 
 using namespace cv;
 
@@ -35,19 +37,29 @@ int main()
     curtn = cudaMemcpy(buf_raw_dev, raw.data, rows * cols, cudaMemcpyHostToDevice);
     assert(curtn == cudaSuccess);
 
-    gpu_bayer_to_rgb_n3(buf_raw_dev, cols, rows, buf_rgb_dev, nullptr);
-    auto cuerr = cudaGetLastError();
+    // new
+    auto start = getTickCount();
+    for (int i = 0; i < 10000; i++) {
+        gpu_bayer_to_rgb_n3(buf_raw_dev, cols, rows, buf_rgb_dev, nullptr);
+    }
+    auto spend = getTickCount() - start;
+    std::cout << "new " << spend << std::endl;
 
     curtn = cudaMemcpy(buf_rgb_host, buf_rgb_dev, rows * cols * 3, cudaMemcpyDeviceToHost);
     assert(curtn == cudaSuccess);
 
     Mat rgb(rows, cols, CV_8UC3, buf_rgb_host);
     cvtColor(rgb, rgb, COLOR_RGB2BGR);
+    // end new
 
 
     // old 
-    gpu_bayer_to_rgb(buf_raw_dev, cols, rows, buf_rgb_dev);
-    cuerr = cudaGetLastError();
+    start = getTickCount();
+    for (int i = 0; i < 10000; i++) {
+        gpu_bayer_to_rgb(buf_raw_dev, cols, rows, buf_rgb_dev);
+    }
+    spend = getTickCount() - start;
+    std::cout << "oldf " << spend << std::endl;
 
     curtn = cudaMemcpy(buf_rgb_host, buf_rgb_dev, rows * cols * 3, cudaMemcpyDeviceToHost);
     assert(curtn == cudaSuccess);
@@ -63,10 +75,6 @@ int main()
     waitKey();
 
     destroyAllWindows();
-
-
-
-
 
     return 0;
 }

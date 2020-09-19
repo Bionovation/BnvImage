@@ -16,10 +16,10 @@
   <ItemGroup>
     <ClInclude Include="src\cuda\gpu_debayer.h" />
     <ClInclude Include="src\cuda\gpu_util.h" />
-    <ClInclude Include="src\libs.h" />
+    <ClInclude Include="include\libs.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\test\debayer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CDD58813-60A3-44E4-AF20-2EBD6A3BDC03}</ProjectGuid>
