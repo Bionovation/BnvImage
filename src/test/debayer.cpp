@@ -37,40 +37,24 @@ int main()
     curtn = cudaMemcpy(buf_raw_dev, raw.data, rows * cols, cudaMemcpyHostToDevice);
     assert(curtn == cudaSuccess);
 
-    // new
-    auto start = getTickCount();
-    for (int i = 0; i < 10000; i++) {
-        gpu_bayer_to_rgb_n3(buf_raw_dev, cols, rows, buf_rgb_dev, nullptr);
-    }
-    auto spend = getTickCount() - start;
-    std::cout << "new " << spend << std::endl;
+
+    gpu_bayer_to_rgb_n3(buf_raw_dev, cols, rows, buf_rgb_dev, nullptr);
+
 
     curtn = cudaMemcpy(buf_rgb_host, buf_rgb_dev, rows * cols * 3, cudaMemcpyDeviceToHost);
     assert(curtn == cudaSuccess);
 
     Mat rgb(rows, cols, CV_8UC3, buf_rgb_host);
+
+    
+
     cvtColor(rgb, rgb, COLOR_RGB2BGR);
     // end new
 
-
-    // old 
-    start = getTickCount();
-    for (int i = 0; i < 10000; i++) {
-        gpu_bayer_to_rgb(buf_raw_dev, cols, rows, buf_rgb_dev);
-    }
-    spend = getTickCount() - start;
-    std::cout << "oldf " << spend << std::endl;
-
-    curtn = cudaMemcpy(buf_rgb_host, buf_rgb_dev, rows * cols * 3, cudaMemcpyDeviceToHost);
-    assert(curtn == cudaSuccess);
-
-    Mat rgb2(rows, cols, CV_8UC3, buf_rgb_host);
-    cvtColor(rgb2, rgb2, COLOR_RGB2BGR);
-    // end old
+    imwrite("F:\\Workdatas\\debayer\\ours.bmp", rgb);
 
     imshow("opencv", imcv);
     imshow("new", rgb);
-    imshow("old", rgb2);
 
     waitKey();
 
