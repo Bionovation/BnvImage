@@ -4,11 +4,13 @@
     <ClInclude Include="src\cuda\gpu_debayer.h" />
     <ClInclude Include="src\cuda\gpu_util.h" />
     <ClInclude Include="include\libs.h" />
+    <ClInclude Include="utils\FindFiles.h" />
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="src\cuda\gpu_debayer.cu" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="utils\FindFiles.cpp" />
     <ClCompile Include="src\test\debayer.cpp" />
   </ItemGroup>
 </Project>
