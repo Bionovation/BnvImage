@@ -8,9 +8,9 @@
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="src\cuda\gpu_debayer.cu" />
+    <CudaCompile Include="src\test\cumsum.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="utils\FindFiles.cpp" />
-    <ClCompile Include="src\test\debayer.cpp" />
   </ItemGroup>
 </Project>

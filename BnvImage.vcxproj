@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="src\cuda\gpu_debayer.cu" />
+    <CudaCompile Include="src\test\cumsum.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\cuda\gpu_debayer.h" />
@@ -20,7 +21,6 @@
     <ClInclude Include="utils\FindFiles.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\test\debayer.cpp" />
     <ClCompile Include="utils\FindFiles.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
