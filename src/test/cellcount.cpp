@@ -10,7 +10,7 @@ using namespace std;
 using namespace cv;
 
 
-
+/*
 #pragma region 小徐的计算红细胞数量算法
 
 struct coord_t {
@@ -249,10 +249,10 @@ vector<coord_t> GetRedCellsCount(Mat rgbMat, RedCellInfoPerImg& redCellInfo)
 
 
 #pragma endregion
+*/
 
 
-
-double GetAverageAreaOfCells(string folder)
+double GetAverageAreaOfCells(string folder,int thresholdValue)
 {
     //string folder = "F:\\Workdatas\\OnelayerCells\\hhh\\1.2-1-1";
     string filter = "*.jpg";
@@ -272,7 +272,7 @@ double GetAverageAreaOfCells(string folder)
         Mat img = imread(imgpath, 0);
         Mat cellArea;
         //threshold(img, cellArea, 0, 255, THRESH_OTSU);
-        threshold(img, cellArea, 178, 255, THRESH_BINARY_INV);
+        threshold(img, cellArea, thresholdValue, 255, THRESH_BINARY_INV);
         morphologyEx(cellArea, cellArea, MORPH_OPEN, kernel);
         auto v = sum(cellArea)[0] / 255.0 / 1000;
         
@@ -285,8 +285,10 @@ double GetAverageAreaOfCells(string folder)
         */
 
         sumAll += v;
-        cout << imgCount << " \\ " << i++ << "  " << v << endl;
-       /* cout << v << endl;
+
+        if(imgCount % 500 == 0)
+            cout << imgCount << " \\ " << i++ << "  " << v << endl;
+        /*cout << v << endl;
         imshow("eee", img);
         imshow("ddd", cellArea);
         waitKey();
@@ -315,11 +317,32 @@ int main()
     };
 */
     string folders[] = {
-        "J:\\Gray\\hhh2\\1-10ul",
-        "J:\\Gray\\hhh2\\2-14ul",
-        "J:\\Gray\\hhh2\\3-14pul",
-        "J:\\Gray\\hhh2\\4-14ppul",
-        "J:\\Gray\\hhh2\\5-14ul",
+        "F:\\Workdatas\\OnelayerCells\\20-11-11\\11-10-1",
+        "F:\\Workdatas\\OnelayerCells\\20-11-11\\11-10-2",
+        "F:\\Workdatas\\OnelayerCells\\20-11-11\\11-10-3",
+        "F:\\Workdatas\\OnelayerCells\\20-11-11\\11-10-4",
+        "F:\\Workdatas\\OnelayerCells\\20-11-11\\11-10-5",
+
+        "F:\\Workdatas\\OnelayerCells\\20-11-11\\11-11-1",
+        "F:\\Workdatas\\OnelayerCells\\20-11-11\\11-11-2",
+        "F:\\Workdatas\\OnelayerCells\\20-11-11\\11-11-3",
+        "F:\\Workdatas\\OnelayerCells\\20-11-11\\11-11-4",
+        "F:\\Workdatas\\OnelayerCells\\20-11-11\\11-11-5",
+    };
+
+    int threshold[] = 
+    {
+        226,
+        233,
+        237,
+        236,
+        239,
+        
+        231,
+        237,
+        238,
+        238,
+        236,
     };
 
     vector<double> averageAreas;
@@ -327,7 +350,10 @@ int main()
     for (int i = 0; i < sizeof(folders) / sizeof(string); i++)
     {
         string folder = folders[i];
-        double v = GetAverageAreaOfCells(folder);
+        int thresholdValue = threshold[i];
+        cout << folder << "   " << thresholdValue << endl;
+
+        double v = GetAverageAreaOfCells(folder, thresholdValue);
         averageAreas.push_back(v);
     }
 
