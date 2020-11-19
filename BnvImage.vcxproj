@@ -20,7 +20,7 @@
     <ClInclude Include="utils\FindFiles.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\test\cellcount.cpp" />
+    <ClCompile Include="src\test\usmsharp.cpp" />
     <ClCompile Include="utils\FindFiles.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

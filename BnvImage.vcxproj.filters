@@ -11,6 +11,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="utils\FindFiles.cpp" />
-    <ClCompile Include="src\test\cellcount.cpp" />
+    <ClCompile Include="src\test\usmsharp.cpp" />
   </ItemGroup>
 </Project>
