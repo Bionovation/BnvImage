@@ -11,10 +11,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="utils\FindFiles.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="src\test\usmsharp.cpp" />
-=======
-    <ClCompile Include="src\test\clarity.cpp" />
->>>>>>> e12772c301650f0e2266d71dbbdfbb9ed7c1b031
+    <ClCompile Include="src\x264\hellox264.cpp" />
   </ItemGroup>
 </Project>
