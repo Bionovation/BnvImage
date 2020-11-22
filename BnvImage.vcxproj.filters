@@ -11,6 +11,5 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="utils\FindFiles.cpp" />
-    <ClCompile Include="src\x264\x264stream.cpp" />
   </ItemGroup>
 </Project>

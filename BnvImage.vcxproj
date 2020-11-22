@@ -20,7 +20,6 @@
     <ClInclude Include="utils\FindFiles.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\x264\x264stream.cpp" />
     <ClCompile Include="utils\FindFiles.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
