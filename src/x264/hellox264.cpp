@@ -18,7 +18,9 @@ using namespace cv;
 
 int dispCamera() 
 {
-	VideoCapture cap(0);
+    const char* url = "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov";
+
+	VideoCapture cap(url);
 	if (!cap.isOpened()) {
 		return -1;
 	}
@@ -166,7 +168,11 @@ void encodeOneFrame(x264_t* pX264Handle, x264_picture_t* pPicIn, Mat frame, int6
 
 int CameraToX264(x264_t* pX264Handle, x264_picture_t* pPicIn)
 {
-	VideoCapture cap(0);
+    const char* url = "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov";
+
+	//VideoCapture cap(0);
+    VideoCapture cap(url);
+
 	if (!cap.isOpened()) {
 		return -1;
 	}
@@ -201,6 +207,6 @@ int hellox264()
 
 int main()
 {
-	// return dispCamera();
-	return hellox264();
+	 return dispCamera();
+	//return hellox264();
 }
